@@ -18,12 +18,11 @@ It is recomended to install the backend first, make sure you have Python 3.10, P
 1. Install the python packages: `$ pipenv install`
 2. Run `$ pipenv shell` to activate your project's virtual environment and use its specific Python and dependencies.
 3. Create a .env file based on the .env.example: `$ cp .env.example .env` if one is not created already
-4. pipenv install flask
-5. pipenv install flask-jwt-extended
-6. Create a user model in models.py (this should already be included in your boilerplate).
-7. Set Up Routes
-8. We will need routes for signup, login, and getting user details.
-9. Import JWT Functionality: `from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager`
+4. Run `$ pipenv install flask`
+5. Run `$ pipenv install flask-jwt-extended`
+6. Create a user model in `./src/api/models.py` (this should already be included in your boilerplate).
+7. Set up your endpoints in `./src/api/routes.py`. We will need routes for signup, login, and getting user details.
+9. Import JWT functionality: `from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager`
 10. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
 11. Run the migrations: `$ pipenv run upgrade`
 12. Run the application: `$ pipenv run start`
@@ -68,6 +67,7 @@ Every Github codespace environment will have **its own database**, so if you're 
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
+3. If you make any changes to your `.env` file, restart your front end.
 
 ## Publish your website!
 
