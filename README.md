@@ -1,6 +1,6 @@
-# WebApp boilerplate with React JS and Flask API
+# JWT Authentication System
 
-Build web applications using React.js for the front end and python/flask for your backend API.
+A simple web application using React.js for the front end and python/flask for your backend API.
 
 - Documentation can be found here: https://4geeks.com/docs/start/react-flask-template
 - Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
@@ -9,25 +9,23 @@ Build web applications using React.js for the front end and python/flask for you
 - Use of .env file.
 - SQLAlchemy integration for database abstraction.
 
-### 1) Installation:
+### Installation:
 
 > If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
 
 It is recomended to install the backend first, make sure you have Python 3.10, Pipenv and a database engine (Posgress recomended)
 
 1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
-
-| Engine    | DATABASE_URL                                        |
-| --------- | --------------------------------------------------- |
-| SQLite    | sqlite:////test.db                                  |
-| MySQL     | mysql://username:password@localhost:port/example    |
-| Postgress | postgres://username:password@localhost:5432/example |
-
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start`
+2. Run `$ pipenv shell` to activate your project's virtual environment and use its specific Python and dependencies.
+3. Create a .env file based on the .env.example: `$ cp .env.example .env` if one is not created already
+4. Run `$ pipenv install flask`
+5. Run `$ pipenv install flask-jwt-extended`
+6. Create a user model in `./src/api/models.py` (this should already be included in your boilerplate).
+7. Set up your endpoints in `./src/api/routes.py`. We will need routes for signup, login, and getting user details.
+9. Import JWT functionality: `from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager`
+10. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
+11. Run the migrations: `$ pipenv run upgrade`
+12. Run the application: `$ pipenv run start`
 
 > Note: Codespaces users can connect to psql by typing: `psql -h localhost -U gitpod example`
 
@@ -69,6 +67,7 @@ Every Github codespace environment will have **its own database**, so if you're 
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
+3. If you make any changes to your `.env` file, restart your front end.
 
 ## Publish your website!
 
