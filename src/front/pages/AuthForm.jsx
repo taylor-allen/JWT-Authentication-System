@@ -1,19 +1,26 @@
 import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signup, login } from "../hooks/actions";
 
 export const AuthForm = () => {
-  const { dispatch } = useGlobalReducer();
+  const { store, dispatch } = useGlobalReducer();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  useEffect(() => {
+    const token = store.token || localStorage.getItem("token_value");
+    if (token) {
+      navigate("/private");
+    }
+  }, [store.token, navigate]);
+
   const onLoginSuccess = (token) => {
-    dispatch({ type: "updateToken", payload: token }); 
-    navigate("/private"); 
+    dispatch({ type: "updateToken", payload: token });
+    navigate("/private");
   };
 
   const handleSubmit = async (e) => {
@@ -31,7 +38,7 @@ export const AuthForm = () => {
     } else {
       // Handle Signup
       const { data, ok } = await signup(email, password);
-      if (ok) { 
+      if (ok) {
         setMessage('Signup successful! Please log in.');
         setIsLogin(true);
         setEmail('');
@@ -70,7 +77,7 @@ export const AuthForm = () => {
               Email:
             </label>
             <input
-              type="email" 
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -83,7 +90,7 @@ export const AuthForm = () => {
               }}
             />
           </div>
-          
+
           <div style={{ marginBottom: "20px" }}>
             <label
               style={{
